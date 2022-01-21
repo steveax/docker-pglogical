@@ -5,9 +5,7 @@ RUN apt-get update && apt-get install -y wget gnupg
 RUN echo "deb http://apt.postgresql.org/pub/repos/apt/ stretch-pgdg main" > /etc/apt/sources.list.d/pgdg.list \
   && wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | \
        apt-key add - \
-  && echo "deb [arch=amd64] http://packages.2ndquadrant.com/pglogical/apt/ stretch-2ndquadrant main" > /etc/apt/sources.list.d/2ndquadrant.list \
-  && wget --quiet -O - http://packages.2ndquadrant.com/pglogical/apt/AA7A6805.asc | apt-key add - \
-  && apt-get update \
+  && wget --quiet -O - https://dl.2ndquadrant.com/default/release/get/deb | bash \
   && apt-get install -y postgresql-11-pglogical
 
 # VOLUME /var/lib/postgresql/data # re-volume this so that the config file changes take???

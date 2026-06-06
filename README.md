@@ -1,6 +1,6 @@
 # Postgres/PGLogical Image
 
-A ready-made, batteries-included Docker image combining Postgres 14 with pglogical.
+A ready-made, batteries-included Docker image combining Postgres 17 with pglogical.
 
 ## Requirements
 

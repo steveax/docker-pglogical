@@ -21,3 +21,21 @@ export PGUSER=postgres
 ```
 
 With the above variables, you should be able to simply run `psql` to connect to the containerized postgres instance.
+
+## Switching Postgres versions
+
+The base `postgres` image declares an implicit data volume (`/var/lib/postgresql/data`). Even though this
+project's `docker-compose.yml` doesn't mount it explicitly, Docker persists it as an anonymous volume across
+rebuilds. If you bump the Postgres major version (e.g. 14 -> 17), the old data directory will still be
+attached and the new server will refuse to start with:
+
+```
+FATAL:  database files are incompatible with server
+```
+
+Fix by removing the volume along with the container before bringing it back up:
+
+```
+docker compose down -v
+docker compose up -d --build
+```
